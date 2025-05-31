@@ -2,11 +2,33 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 const verificationSchema = new mongoose.Schema({
-    inputText: {type: String, required: true},
-    inputType:{type: String, enum: ['text', 'image'], required: true},
-    verdict: {type: String, enum:['True', 'False', 'Inconclusive'], required: true},
-    explanation:{type: String, required: true},
-    sources: {type: [String], default: []},
-    createdAt: {type: Date, default: Date.now},
-});
+  inputText: { type: String, required: true },
+  inputType: { type: String, enum: ['text', 'image'], required: true },
+  verdict: { type: String, enum: ['True', 'False', 'Inconclusive'], required: true },
+  summary: { type: String, required: true },
+  lastVerified: { type: String, required: true }, // format: YYYY-MM-DD
+
+  detailedAnalysis: {
+    type: String,
+    required: true,
+    default: 'not yet analyzed'
+  },
+
+  sourcesUsed: [
+    {
+      url: String,
+      relevance: String,
+      publicationDate: { type: String, default: 'unknown' }
+    }
+  ],
+
+  nextSteps: { type: String },
+
+  metadata: {
+    processedAt: { type: Date, default: Date.now },
+    sourceCount: Number,
+    modelUsed: String
+  }
+}, { timestamps: true });
+
 module.exports = mongoose.model('Verification', verificationSchema);
