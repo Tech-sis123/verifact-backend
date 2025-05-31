@@ -5,16 +5,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY
 });
 
-const analyze = async (text, searchResults) => {
-  if (!text || !Array.isArray(searchResults)) {
-    throw new Error("Invalid input: text and searchResults array required");
+const analyze = async (text, searchResults = []) => {
+  if (!text || typeof text !== 'string') {
+    throw new Error("Invalid input: non-empty 'text' is required");
   }
 
-  const formattedSources = searchResults.map(result => ({
-    title: result.title || "Untitled source",
-    link: result.link || "#",
-    snippet: result.snippet || ""
-  }));
+  const formattedSources = Array.isArray(searchResults)
+    ? searchResults.map(result => ({
+        title: result?.title || "Untitled source",
+        link: result?.link || "#",
+        snippet: result?.snippet || ""
+      }))
+    : [];
+
+  const sourcesSection = formattedSources.length > 0
+    ? `${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 ? `(+ ${formattedSources.length - 10} more)` : ''}`
+    : "None. No web search results were available.";
 
   const prompt = `
 You are a senior fact-checking analyst verifying: "${text}"

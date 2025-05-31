@@ -6,12 +6,16 @@ const logger = require('../config/logger');
 
 const verifyRumor = async (req, res) => {
   try {
-    let inputText = req.body.text;
+    let inputText = req.body.text?.trim() || '';
     let inputType = 'text';
 
+    // If image is uploaded, extract text and combine it with provided text
     if (req.file && req.file.buffer) {
-      inputText = await ocrService.extractText(req.file.buffer);
-      inputType = 'image';
+      const imageText = await ocrService.extractText(req.file.buffer);
+      if (imageText?.trim()) {
+        inputType = inputText ? 'text+image' : 'image';
+        inputText = `${inputText}\n\n[Extracted from image]: ${imageText.trim()}`;
+      }
     }
 
     const searchResults = await searchService.query(inputText);
@@ -38,7 +42,7 @@ const verifyRumor = async (req, res) => {
       summary: savedDoc.summary,
       lastVerified: savedDoc.lastVerified,
       detailedAnalysis: savedDoc.detailedAnalysis,
-      nextSteps:savedDoc.nextSteps,
+      nextSteps: savedDoc.nextSteps,
       sourcesUsed: savedDoc.sourcesUsed,
     });
 

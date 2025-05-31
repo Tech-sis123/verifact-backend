@@ -10,7 +10,7 @@ const requestLogger = (req, res, next) => {
     logger.info(`${req.method} ${req.originalUrl} from ${req.ip}`);
     next();
 };
-app.use(cors());
+app.use(cors({origin: process.env.CORS_ORIGIN}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
