@@ -3,7 +3,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const verificationSchema = new mongoose.Schema({
   inputText: { type: String, required: true },
-  inputType: { type: String, enum: ['text', 'image'], required: true },
+  inputType: { type: String, enum: ['text', 'image', 'text+image'], required: true },
   verdict: { type: String, enum: ['True', 'False', 'Inconclusive'], required: true },
   summary: { type: String, required: true },
   lastVerified: { type: String, required: true }, // format: YYYY-MM-DD

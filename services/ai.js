@@ -18,9 +18,6 @@ const analyze = async (text, searchResults = []) => {
       }))
     : [];
 
-  const sourcesSection = formattedSources.length > 0
-    ? `${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 ? `(+ ${formattedSources.length - 10} more)` : ''}`
-    : "None. No web search results were available.";
 
   const prompt = `
 You are a senior fact-checking analyst verifying: "${text}"
@@ -68,7 +65,7 @@ ${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 
       model: "gpt-4-turbo",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
-      response_format: { type: "text" } // Corrected line
+      response_format: { type: "json_object" } // Corrected line
     });
     return result;
   },
