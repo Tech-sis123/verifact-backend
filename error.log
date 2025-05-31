@@ -1,0 +1,15 @@
+{"level":"error","message":"Verification failed: Cannot read properties of undefined (reading 'text')"}
+{"level":"error","message":"Verification failed: Cannot read properties of undefined (reading 'text')"}
+{"level":"error","message":"Search failed: Request failed with status code 401"}
+{"level":"error","message":"Verification failed: Fact-gathering service unavailable"}
+{"level":"error","message":"Search failed: getaddrinfo ENOTFOUND serpapi.com"}
+{"level":"error","message":"Verification failed: Fact-gathering service unavailable"}
+{"level":"error","message":"Databse query failed: ReferenceError: Cannot access 'verification' before initialization"}
+{"level":"error","message":"Databse query failed: ReferenceError: Cannot access 'verification' before initialization"}
+{"level":"error","message":"Databse query failed: ReferenceError: Cannot access 'verification' before initialization"}
+{"level":"error","message":"Search failed: getaddrinfo ENOTFOUND google.serper.dev"}
+{"level":"error","message":"Verification failed: Fact-gathering service unavailable"}
+{"level":"error","message":"Verification failed: Cannot read properties of undefined (reading 'text')"}
+{"level":"error","message":"Parallel processing failed: Cannot read properties of undefined (reading 'map')"}
+{"level":"error","message":"Verification pipeline failed: Fact-checking services unavailable"}
+{"level":"error","message":"Verification failed: Verification.save is not a function"}
