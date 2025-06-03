@@ -9,7 +9,7 @@ const verifyRumor = async (req, res) => {
     let inputText = req.body.text?.trim() || '';
     let inputType = 'text';
 
-    // If image is uploaded, extract text and combine it with provided text
+
     if (req.file && req.file.buffer) {
       const imageText = await ocrService.extractText(req.file.buffer);
       if (imageText?.trim()) {

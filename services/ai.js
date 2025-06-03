@@ -12,17 +12,17 @@ const analyze = async (text, searchResults = []) => {
 
   const formattedSources = Array.isArray(searchResults)
     ? searchResults.map(result => ({
-        title: result?.title || "Untitled source",
-        link: result?.link || "#",
-        snippet: result?.snippet || ""
-      }))
+      title: result?.title || "Untitled source",
+      link: result?.link || "#",
+      snippet: result?.snippet || ""
+    }))
     : [];
 
 
   const prompt = `
 You are a senior fact-checking analyst verifying: "${text}"
 
-Your analysis must adhere to the following:
+Your analysis must adhere to the following and you must return a response in the language of the text you're analyzing:
 
 **1. Verdict:**
     - "True": If 1 or more authoritative sources corroborate the claim and also if the 1 or 2 sources supporting the claim are very very credible and known for purely true and backed up information
@@ -60,24 +60,24 @@ ${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 
 
   try {
     const response = await retry(
-  async () => {
-    const result = await openai.chat.completions.create({
-      model: "gpt-4-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.3,
-      response_format: { type: "json_object" } // Corrected line
-    });
-    return result;
-  },
-  {
-    retries: 2,
-    minTimeout: 1000
-  }
-);
+      async () => {
+        const result = await openai.chat.completions.create({
+          model: "gpt-4-turbo",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.3,
+          response_format: { type: "json_object" }
+        });
+        return result;
+      },
+      {
+        retries: 2,
+        minTimeout: 1000
+      }
+    );
 
     if (
-      !response || 
-      !response.choices || 
+      !response ||
+      !response.choices ||
       !response.choices[0]?.message?.content
     ) {
       throw new Error("OpenAI response missing or malformed");
@@ -104,7 +104,7 @@ ${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 
   }
 };
 
-// Retry helper
+
 async function retry(fn, options = {}) {
   const { retries = 3, minTimeout = 1000 } = options;
   let lastError;

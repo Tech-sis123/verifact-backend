@@ -7,7 +7,7 @@ async function connectDB() {
   try {
     await client.connect();
     console.log("✅ Connected to MongoDB Atlas");
-    return client.db("yourDatabaseName"); // Replace with your DB name
+    return client.db("verifact-backend");
   } catch (err) {
     console.error("❌ Connection failed:", err);
     process.exit(1);

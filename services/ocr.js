@@ -14,14 +14,14 @@ const computerVisionClient = new ComputerVisionClient(
 
 const extractText = async (imageBuffer) => {
   try {
-    
+
     const result = await computerVisionClient.readInStream(imageBuffer);
 
-    
+
     const operationLocation = result.operationLocation;
     const operationId = operationLocation.substring(operationLocation.lastIndexOf('/') + 1);
 
-    
+
     let readResult;
     while (true) {
       readResult = await computerVisionClient.getReadResult(operationId);
@@ -33,8 +33,8 @@ const extractText = async (imageBuffer) => {
       throw new Error("OCR operation failed");
     }
 
-    
-    const lines = readResult.analyzeResult.readResults.flatMap(page => 
+
+    const lines = readResult.analyzeResult.readResults.flatMap(page =>
       page.lines.map(line => line.text)
     );
     return lines.join('\n');

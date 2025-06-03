@@ -6,7 +6,7 @@ const verificationSchema = new mongoose.Schema({
   inputType: { type: String, enum: ['text', 'image', 'text+image'], required: true },
   verdict: { type: String, enum: ['True', 'False', 'Inconclusive'], required: true },
   summary: { type: String, required: true },
-  lastVerified: { type: String, required: true }, // format: YYYY-MM-DD
+  lastVerified: { type: String, required: true },
 
   detailedAnalysis: {
     type: String,
