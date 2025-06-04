@@ -15,23 +15,7 @@ const requestLogger = (req, res, next) => {
 };
 
 
-const allowedOrigins = [
-  'http://127.0.0.1:8080',
-  'https://sadiq-teslim.github.io',
-  'http://127.0.0.1:3000',
-  'chrome-extension:peblgkmgonnbaacnilblbojacdldjlll'
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like curl or Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+app.use(cors());
 
 
 app.use(express.json());
