@@ -17,7 +17,9 @@ const requestLogger = (req, res, next) => {
 
 const allowedOrigins = [
   'http://127.0.0.1:8080',
-  'https://sadiq-teslim.github.io'
+  'https://sadiq-teslim.github.io',
+  'http://127.0.0.1:3000',
+  'chrome-extension:peblgkmgonnbaacnilblbojacdldjlll'
 ];
 
 app.use(cors({

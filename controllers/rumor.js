@@ -30,6 +30,7 @@ const verifyRumor = async (req, res) => {
       detailedAnalysis: analysis.detailedAnalysis,
       sourcesUsed: analysis.sourcesUsed,
       nextSteps: analysis.nextSteps,
+      language: analysis.language,
       metadata: analysis.metadata
     });
 
@@ -44,6 +45,7 @@ const verifyRumor = async (req, res) => {
       detailedAnalysis: savedDoc.detailedAnalysis,
       nextSteps: savedDoc.nextSteps,
       sourcesUsed: savedDoc.sourcesUsed,
+      language: savedDoc.language
     });
 
   } catch (error) {

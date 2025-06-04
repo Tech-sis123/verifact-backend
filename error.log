@@ -36,3 +36,4 @@
 {"level":"error","message":"Verification failed: Analysis failed: 400 Invalid type for 'response_format': expected an object, but got a string instead."}
 {"level":"error","message":"Search failed: read ECONNRESET"}
 {"level":"error","message":"Verification failed: Fact-gathering service unavailable"}
+{"level":"error","message":"Verification failed: Verification validation failed: language: Path `language` is required."}

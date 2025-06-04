@@ -22,7 +22,7 @@ const analyze = async (text, searchResults = []) => {
   const prompt = `
 You are a senior fact-checking analyst verifying: "${text}"
 
-Your analysis must adhere to the following and you must return a response in the language of the text you're analyzing:
+Your analysis must adhere to the following and you must return a response in the language of the text you're analyzing and also the name of the language:
 
 **1. Verdict:**
     - "True": If 1 or more authoritative sources corroborate the claim and also if the 1 or 2 sources supporting the claim are very very credible and known for purely true and backed up information
@@ -54,8 +54,9 @@ ${JSON.stringify(formattedSources.slice(0, 10))} ${formattedSources.length > 10 
       "relevance": "string",
       "publicationDate": "string|unknown"
     }
-  ]
+  ],
     "next steps": "string"
+    "language": "string"
 }`;
 
   try {

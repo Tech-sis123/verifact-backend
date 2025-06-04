@@ -23,6 +23,7 @@ const verificationSchema = new mongoose.Schema({
   ],
 
   nextSteps: { type: String },
+  language: {type: String, required: true},
 
   metadata: {
     processedAt: { type: Date, default: Date.now },
